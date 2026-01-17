@@ -170,7 +170,7 @@ other file objects. This variable has to be set before `no-littering' is loaded.
           ((symbol-function 'runtime)
            (symbol-function #'no-littering-expand-runtime-file-name)))
 
-  (make-directory no-littering-state-directory t)
+  (make-directory no-littering-data-directory t)
   (make-directory no-littering-etc-directory t)
   (make-directory no-littering-var-directory t)
   (make-directory no-littering-cache-directory t)
