@@ -1,13 +1,15 @@
 ;;; no-littering.el --- Help keeping ~/.config/emacs clean  -*- lexical-binding:t -*-
 
-;; Copyright (C) 2016-2025 Jonas Bernoulli
+;; Copyright (C) 2016-2026 Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <emacs.no-littering@jonas.bernoulli.dev>
 ;; Homepage: https://github.com/emacscollective/no-littering
 ;; Keywords: convenience
 
-;; Package-Version: 1.7.5
-;; Package-Requires: ((emacs "26.1") (compat "30.0.1.0"))
+;; Package-Version: 1.8.3
+;; Package-Requires: (
+;;     (emacs  "26.1")
+;;     (compat "30.1"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -193,8 +195,13 @@ This variable has to be set before `no-littering' is loaded.")
     (setq ede-project-placeholder-cache-file (cache "ede-projects.el"))
     (setq erc-dcc-get-default-directory    (var "erc/dcc/"))
     (setq erc-log-channels-directory       (var "erc/log-channels/"))
-    (setq erc-startup-file-list            (list (etc "erc/startup.el") (etc "erc/startup") ".ercrc.el" ".ercrc"))
+    (setq erc-startup-file-list            (list (etc "erc/startup.el")
+                                                 (etc "erc/startup")
+                                                 ".ercrc.el"
+                                                 ".ercrc"))
     (setq eshell-aliases-file              (etc "eshell/aliases"))
+    ;; This controls where `eshell-history-file-name' is places.
+    ;; Other files belong in "etc/" so theme their variables directly.
     (setq eshell-directory-name            (var "eshell/"))
     (setq eshell-login-script              (etc "eshell/login"))
     (setq eshell-rc-script                 (etc "eshell/rc"))
@@ -233,6 +240,7 @@ This variable has to be set before `no-littering' is loaded.")
     (setq save-place-file                  (var "save-place.el"))
     (setq savehist-file                    (var "savehist.el"))
     (setq semanticdb-default-save-directory (var "semantic/"))
+    (setq server-auth-dir                  (var "server/auth/"))
     (setq shadow-info-file                 (var "shadow/info.el"))
     (setq shadow-todo-file                 (var "shadow/todo.el"))
     (setq shared-game-score-directory      (var "shared-game-score/"))
@@ -248,13 +256,15 @@ This variable has to be set before `no-littering' is loaded.")
 
     (eval-after-load 'desktop     '(make-directory desktop-dirname t))
     (eval-after-load 'erc         '(make-directory erc-dcc-get-default-directory t))
-    (eval-after-load 'eshell      '(make-directory eshell-directory-name t))
+    (eval-after-load 'eshell      `(with-file-modes #o700
+                                     (make-directory ,(etc "eshell/") t)))
     (eval-after-load 'eww         '(make-directory eww-bookmarks-directory t))
     (eval-after-load 'gnus        `(make-directory ,(etc "gnus/") t))
     (eval-after-load 'gnus        '(make-directory gnus-dribble-directory t))
     (eval-after-load 'newsticker  `(make-directory ,(var "newsticker/") t))
     (eval-after-load 'org         `(make-directory ,(var "org/") t))
     (eval-after-load 'shadowfile  `(make-directory ,(var "shadow/") t))
+    (eval-after-load 'treesit     `(push ,(var "treesit/") treesit-extra-load-path))
 
 ;;; Third-party packages
 
@@ -264,6 +274,7 @@ This variable has to be set before `no-littering' is loaded.")
     (setq anaconda-mode-installation-directory (var "anaconda-mode/"))
     (setq annotate-file                    (var "annotations.el"))
     (setq async-byte-compile-log-file      (var "async-bytecomp.log"))
+    (setq autocrypt-save-file              (var "autocrypt-data.eld"))
     (setq auto-package-update-last-update-day-path (var "auto-package-update-last-update-day"))
     (setq bbdb-file                        (var "bbdb/bbdb.el"))
     (setq bbdb-vcard-directory             (var "bbdb/vcard/"))
@@ -286,7 +297,8 @@ This variable has to be set before `no-littering' is loaded.")
     (setq dap-breakpoints-file             (var "dap/breakpoints.el"))
     (setq dap-java-test-runner             (var "lsp-java/eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar"))
     (setq dap-utils-extension-path         (var "dap/extensions/"))
-    (setq dape-adapter-dir                 (var "dape-adapters/"))
+    (setq dape-adapter-dir                 (var "dape/adapters/"))
+    (setq dape-default-breakpoints-file    (var "dape/breakpoints.eld"))
     (setq debbugs-gnu-persistency-file     (var "debbugs.el"))
     (setq detached-db-directory            (var "detached/db/"))
     (setq detached-session-directory       (var "detached/sessions/"))
@@ -321,6 +333,8 @@ This variable has to be set before `no-littering' is loaded.")
     (setq gnus-notes-file                  (var "gnus-notes/articles.el"))
     (setq gnus-notes-top-dir               (var "gnus-notes/"))
     (setq gptel-crowdsourced-prompts-file  (var "gptel-crowdsourced-prompts.csv"))
+    (setq gptel-gh-token-file              (var "gptel/gh-token"))
+    (setq gptel-gh-github-token-file       (var "gptel/gh-github-token"))
     (setq grammalecte-settings-file        (etc "grammalecte-settings.el"))
     (setq hackernews-visited-links-file    (var "hackernews/visited-links.el"))
     (setq harpoon-cache-file               (cache "harpoon/"))
@@ -368,12 +382,14 @@ This variable has to be set before `no-littering' is loaded.")
     (setq org-caldav-save-directory        (var "org/caldav/save"))
     (setq org-gcal-dir                     (var "org/gcal/"))
     (setq org-journal-cache-file           (cache "org/journal-cache.el"))
+    (setq org-node-data-dir                (var "org/node/"))
     (setq org-node-fakeroam-data-dir       (var "org/node-fakeroam/"))
     (setq org-recent-headings-save-file    (var "org/recent-headings.el"))
     (setq org-registry-file                (var "org/registry.el"))
     (setq org-roam-db-location             (var "org/org-roam.db"))
     (setq package-quickstart-file          (var "package-quickstart.el"))
     (setq pandoc-data-dir                  (etc "pandoc-mode/"))
+    (setq parinfer-rust-library-directory  (var "parinfer-rust/"))
     (setq pcache-directory                 (cache "pcache/"))
     (setq pdf-view-restore-filename        (var "pdf-view-restore.el"))
     (setq persist--directory-location      (var "persist/"))
@@ -517,20 +533,23 @@ you must turn of these features completely."
           ("\\`/dev/shm\\([^/]*/\\)*\\(.*\\)\\'" "\\2")
           (".*" ,(no-littering-expand-state-file-name "auto-save/") t)))
   (setq backup-directory-alist
-        `((,(concat "\\`" (file-name-as-directory temporary-file-directory)))
-          ("\\`/tmp/" . nil)
-          ("\\`/dev/shm/" . nil)
-          ("." . ,(no-littering-expand-state-file-name "backup/"))))
+        (delete-dups
+         `((,(concat "\\`" (file-name-as-directory temporary-file-directory)))
+           ("\\`/tmp/" . nil)
+           ("\\`/dev/shm/" . nil)
+           ("." . ,(no-littering-expand-state-file-name "backup/")))))
   (setq undo-tree-history-directory-alist
-        `((,(concat "\\`" (file-name-as-directory temporary-file-directory)))
-          ("\\`/tmp/" . nil)
-          ("\\`/dev/shm/" . nil)
-          ("." . ,(no-littering-expand-state-file-name "undo-tree-hist/"))))
+        (delete-dups
+         `((,(concat "\\`" (file-name-as-directory temporary-file-directory)))
+           ("\\`/tmp/" . nil)
+           ("\\`/dev/shm/" . nil)
+           ("." . ,(no-littering-expand-state-file-name "undo-tree-hist/")))))
   )
 
 ;;; _
 (provide 'no-littering)
 ;; Local Variables:
 ;; indent-tabs-mode: nil
+;; lisp-indent-local-overrides: ((cond . 0) (interactive . 0))
 ;; End:
 ;;; no-littering.el ends here
