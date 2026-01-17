@@ -185,7 +185,7 @@ other file objects. This variable has to be set before `no-littering' is loaded.
 
     (setq abbrev-file-name                 (etc "abbrev.el"))
     (setq auto-insert-directory            (etc "auto-insert/"))
-    (setq auto-save-list-file-prefix       (var "auto-save/sessions/"))
+    (setq auto-save-list-file-prefix       (runtime "auto-save/sessions/"))
     (setq bookmark-default-file            (var "bookmark-default.el"))
     (setq calc-settings-file               (etc "calc-settings.el"))
     (setq desktop-dirname                  (var "desktop/"))
@@ -531,19 +531,19 @@ you must turn of these features completely."
            ,(concat (file-name-as-directory temporary-file-directory) "\\2") t)
           ("\\`/tmp\\([^/]*/\\)*\\(.*\\)\\'" "\\2")
           ("\\`/dev/shm\\([^/]*/\\)*\\(.*\\)\\'" "\\2")
-          (".*" ,(no-littering-expand-state-file-name "auto-save/") t)))
+          (".*" ,(no-littering-expand-runtime-file-name "auto-save/") t)))
   (setq backup-directory-alist
         (delete-dups
          `((,(concat "\\`" (file-name-as-directory temporary-file-directory)))
            ("\\`/tmp/" . nil)
            ("\\`/dev/shm/" . nil)
-           ("." . ,(no-littering-expand-state-file-name "backup/")))))
+           ("." . ,(no-littering-expand-runtime-file-name "backup/")))))
   (setq undo-tree-history-directory-alist
         (delete-dups
          `((,(concat "\\`" (file-name-as-directory temporary-file-directory)))
            ("\\`/tmp/" . nil)
            ("\\`/dev/shm/" . nil)
-           ("." . ,(no-littering-expand-state-file-name "undo-tree-hist/")))))
+           ("." . ,(no-littering-expand-runtime-file-name "undo-tree-hist/")))))
   )
 
 ;;; _
