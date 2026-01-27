@@ -271,12 +271,12 @@ other file objects. This variable has to be set before `no-littering' is loaded.
     (eval-after-load 'newsticker  '(make-directory newsticker-dir t))
     (eval-after-load 'org         `(make-directory ,(var "org/") t))
     (eval-after-load 'org         `(make-directory ,(var "data/") t))
-    (eval-after-load 'org         '(make-directory org-publish-timestamp_directory t))
+    (eval-after-load 'org         '(make-directory org-publish-timestamp-directory t))
     (eval-after-load 'persist     '(make-directory persist--directory_location t))
     (eval-after-load 'rcirc       '(make-directory rcirc-log-directory t))
     (eval-after-load 'shadowfile  `(make-directory ,(data "shadow/") t))
-    (eval-after-load 'treesit     `(push ,(var "treesit/") treesit-extra-load-path))
-    (eval-after-load 'url         '(make-directory url-configuration_directory t))
+    (eval-after-load 'treesit     `(push ,(data "treesit/") treesit-extra-load-path))
+    (eval-after-load 'url         '(make-directory url-configuration-directory t))
 
 ;;; Third-party packages
 
@@ -334,7 +334,7 @@ other file objects. This variable has to be set before `no-littering' is loaded.
     (setq emacs-gc-stats-file              (data "emacs-gc-stats.eld"))
     (setq ement-sessions-file              (var "ement-sessions.el"))
     (setq emms-directory                   (data "emms/"))
-    (setq emojify-emojis-dir               (data "emojify/"))
+    (setq emojify-emojis-dir               (cache "emojify/emojis/"))
     (setq epkg-repository                  (data "epkgs/"))
     (setq equake-persistent-display-file   (var "equake-persistent-display"))
     (setq fontaine-latest-state-file       (var "fontaine-latest-state.eld"))
@@ -481,7 +481,7 @@ other file objects. This variable has to be set before `no-littering' is loaded.
     (eval-after-load 'sx          '(make-directory sx-cache-directory t))
     (eval-after-load 'wl          `(make-directory ,(etc "wanderlust") t))
     (eval-after-load 'xkcd        '(make-directory xkcd-cache-dir t))
-    (eval-after-load 'yasnippet   `(make-directory (car yas-snippet-dirs) t))
+    (eval-after-load 'yasnippet   '(make-directory (car yas-snippet-dirs) t))
     ))
 
 ;;; Advices
