@@ -220,7 +220,7 @@ other file objects. This variable has to be set before `no-littering' is loaded.
     (setq image-dired-gallery-dir          (cache "image-dired/gallery/"))
     (setq image-dired-temp-image-file      (cache "image-dired/temp-image"))
     (setq image-dired-temp-rotate-image-file (cache "image-dired/temp-rotate-image"))
-    (setq Info-saved-history-file          (var "info-saved-history.eld"))
+    ;; ??? (setq Info-saved-history-file          (var "info-saved-history.eld"))
     (setq kkc-init-file-name               (etc "kkc-init.el"))
     (setq multisession-directory           (var "multisession/"))
     (setq newsticker-cache-filename        (cache "newsticker-cache.el"))
@@ -275,7 +275,7 @@ other file objects. This variable has to be set before `no-littering' is loaded.
     (eval-after-load 'persist     '(make-directory persist--directory_location t))
     (eval-after-load 'rcirc       '(make-directory rcirc-log-directory t))
     (eval-after-load 'shadowfile  `(make-directory ,(data "shadow/") t))
-    (eval-after-load 'treesit     `(push ,(data "treesit/") treesit-extra-load-path))
+    (eval-after-load 'treesit     `(push ,(data "treesit/tree-sitter") treesit-extra-load-path))
     (eval-after-load 'url         '(make-directory url-configuration-directory t))
 
 ;;; Third-party packages
