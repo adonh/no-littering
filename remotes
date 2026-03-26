@@ -1,0 +1,8 @@
+origincb	ssh://git@codeberg.org/adon/no-littering.git (fetch)
+origincb	ssh://git@codeberg.org/adon/no-littering.git (push)
+origingh	git@github_ah:adonh/no-littering.git (fetch)
+origingh	git@github_ah:adonh/no-littering.git (push)
+upstream	https://codeberg.org/rossabaker/no-littering.git (fetch)
+upstream	https://codeberg.org/rossabaker/no-littering.git (push)
+vendor	https://github.com/emacscollective/no-littering.git (fetch)
+vendor	https://github.com/emacscollective/no-littering.git (push)
